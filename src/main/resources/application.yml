@@ -20,17 +20,17 @@ spring:
     password: blog
 
   jpa:
-    open-in-view: true
+    open-in-view: true # osiv, true일 경우 영속성 컨텍스트가 트랜잭션 범위를 넘어선 레이어까지 살아있다
     hibernate:
       ddl-auto: create # update, none, create등이 들어갈 수 있으며 create는 실행할때마다 테이블을 새로 만들겠다는 의미(write의 의미 update가 append임)
       #그래서 한번 실행되고는 update로 바꿔줘야 테이블 데이터가 안날라감
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #entity를 만들때 (@ENTITY되어있는걸 테이블로 만들때) 변수명 그대로 DB에 필드를 만들어준다는 의미 (naming.뒤를 바꿔주면 다른 이름만들기 전략도 가능)
-      use-new-id-generator-mappings: false    #연결된 db(mysql)의 기본인 autoincrement, 오라클로 말하면 시퀀스를 어떤방식으로 사용할건지, false로 하면 jpa가 사용하는 기본 넘버링 전략을 따르지 않음 true는 jpa의 기본을 따름
-      #이렇게 false 해놓고 @GeneratedValue에서 IDENTITIY로 db의 전략을 따라가게 해놓아서 mysql의 기본인 autoincrement를 따라감
-    #show-sql: true #이게 true이면 콘솔창에 sql문이 동작하는게 보임
+      use-new-id-generator-mappings: false  #jpa가 사용하는 기본 넘버링 전략을 사용할건지 묻는것, false로 하면 jpa가 사용하는 기본 넘버링 전략을 따르지 않음 true는 jpa의 기본을 따름
+      #이렇게 false 해놓고 model(@Entity)의 PK에서 @GeneratedValue어노테이션 값을 IDENTITIY로 db의 전략을 따라가게 해놓아서 mysql의 기본인 autoincrement를 따라가게 했음
+    show-sql: true #이게 true이면 콘솔창에 sql문이 동작하는게 보임
     properties:
-      hibernate.format_sql: true # 원래 show-sql은 한줄로 sql이 보이게되는데 이쁘게 들여쓰기 해줌
+      hibernate.format_sql: true # 콘솔창 sql 이쁘게 들여쓰기 해줌
 
 
 
