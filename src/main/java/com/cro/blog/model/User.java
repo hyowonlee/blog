@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 public class User {
     @Id // PK 설정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 넘버링 전략, 연결된 db의 넘버링 전략을 따라간다(mysql이니 auto-increment), application.yml에서 jpa의 기본 넘버링 전략을 따라가지 않게 false로 해놓고 db따라가게 적용해놓은것
-    private long id; // PK, auto-increment로 넘버링 할것
+    private int id; // PK, auto-increment로 넘버링 할것
 
     @Column(nullable = false, length = 30) // null이 되면 안되니 not null 설정, 길이 제한 설정
     private String username; // id
