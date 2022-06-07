@@ -1,5 +1,9 @@
 package com.cro.blog.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -7,7 +11,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
+@Entity // 이 어노테이션으로 jpa가 이 코드 읽어서 db에 테이블 생성, 이 클래스는 ORM(db에 매핑을 시켜준다)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Board {
 
     @Id // PK 설정
@@ -23,8 +31,8 @@ public class Board {
     @ColumnDefault("0") // 조회수 기본 0
     private int count; // 조회수
 
-    @ManyToOne // Many = board, One = User
-    @JoinColumn(name = "userId") // DB에는 userId라는 컬럼명으로 들어가게 될것
+    @ManyToOne // 연관관계 세팅, Many = board, One = User
+    @JoinColumn(name = "userId") // DB에는 userId라는 컬럼명으로 들어가게 될것 (여기선 객체지만 db에 만들어질땐 int의 FK로 만들어질것)
     private User user; // 작성자 정보 (JPA 사용시 오브젝트를 DB에 저장할 수 있게됨, ORM에서는 ID를 통한 외래키로 조인하지 않고 그냥 엔티티 객체 자체를 멤버변수로 넣어줌)
 
     @CreationTimestamp // 생성시 자동으로 시간 입력
