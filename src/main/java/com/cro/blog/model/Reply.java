@@ -28,8 +28,9 @@ public class Reply {
     @JoinColumn(name = "userId")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "boardId")
+    @ManyToOne // 연관관계의 주인이란 FK를 가진 오브젝트(테이블)라고 볼 수 있는데 여기에서 FK 만들어줬으니
+    // Board class와 Reply class에서 주인은 Reply class가 된다 그리고 Board class에서는 FK를 생성하지 않고 mappedBy로 Reply가 주인이라고 지정해 줬음
+    @JoinColumn(name = "boardId") // 현재 Board Table에서는 Reply와의 FK Column을 만들지 않고 mappedBy로 주인을 지정했고 여기서 FK 만들어줬으니 연관관계의 주인은 Reply가 됨
     private Board board;
 
     @CreationTimestamp
