@@ -1,4 +1,4 @@
-package com.cro.blog.test;
+package com.cro.blog.test.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

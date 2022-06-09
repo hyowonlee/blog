@@ -8,5 +8,12 @@
 </head>
 <body>
 <h1>this page is test page</h1>
+<form action="/dummy/join" method="post">
+    <input type="text" name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+    <input type="text" name="email" placeholder="email">
+    <%--<button type="submit">submit</button>--%>
+    <button>submit</button>
+</form>
 </body>
 </html>
