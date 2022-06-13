@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+import java.util.function.Supplier;
+
 @Controller
 public class DummyControllerTest {
 
@@ -40,7 +43,6 @@ public class DummyControllerTest {
 
         return "DummyControllerTest.testJoin";
     }
-
     //객체가 아닌 변수로 받기
 //    @PostMapping("/dummy/join")
 //    public void testJoin(String username, String password, String email) // view에서 태그의 속성인 name과 변수명이 같다면 @RequestParame("username") 필요없음
@@ -48,4 +50,41 @@ public class DummyControllerTest {
 //        System.out.println(id);
 //        System.out.println(password);
 //    }
+
+
+
+
+
+    @GetMapping("/dummy/search")
+    @ResponseBody
+    public User testSearchGet(int id)
+    {
+        User user = userRepository.findById(id).orElseThrow(new Supplier<IllegalArgumentException>() {
+            @Override
+            public IllegalArgumentException get() {
+                return new IllegalArgumentException("해당 사용자가 없습니다");
+            }
+        }); // null 반환 시 에러 반환
+
+        System.out.println("DummyControllerTest.testSearchGet");
+
+        return user;
+    }
+
+    @GetMapping("/dummy/search/{id}")
+    @ResponseBody
+    public User testSearchGet2(@PathVariable int id)
+    {
+        User user = userRepository.findById(id).orElseThrow(new Supplier<IllegalArgumentException>() {
+            @Override
+            public IllegalArgumentException get() {
+                return new IllegalArgumentException("해당 사용자가 없습니다");
+            }
+        }); // null 반환 시 에러 반환
+
+        System.out.println("DummyControllerTest.testSearchGet2");
+
+        return user;
+    }
+
 }

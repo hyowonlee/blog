@@ -15,5 +15,9 @@
     <%--<button type="submit">submit</button>--%>
     <button>submit</button>
 </form>
+<form action="/dummy/search" method="get">
+    <input type="text" name="id">
+    <button>search</button>
+</form>
 </body>
 </html>
