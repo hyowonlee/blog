@@ -59,6 +59,10 @@ public class DummyControllerTest {
     @ResponseBody
     public User testSearchGet(int id)
     {
+//        User user = userRepository.findById(id).orElseThrow(() -> {
+//            return new IllegalArgumentException("해당 사용자가 없습니다");
+//        }); // 밑에있는거랑 같은데 람다식으로 익명클래스 처리해서 한거
+
         User user = userRepository.findById(id).orElseThrow(new Supplier<IllegalArgumentException>() {
             @Override
             public IllegalArgumentException get() {
