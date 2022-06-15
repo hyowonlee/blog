@@ -11,6 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -119,5 +120,42 @@ public class DummyControllerTest {
         Page<User> pageList = userRepository.findAll(pageable);
         List<User> userPageList = pageList.getContent(); // 리스트로 받아서 데이터만 리턴해주는게 좋다
         return userPageList;
+    }
+
+    //회원정보 update
+    @PostMapping("/dummy/update")
+    @ResponseBody
+    public User testUpdatePost(User user)
+    {
+        User selectUser = userRepository.findByUsername(user.getUsername()).orElseThrow(()->{
+            return new IllegalArgumentException("해당 사용자가 없습니다");
+        });
+
+        selectUser.setUsername(user.getUsername());
+        selectUser.setPassword(user.getPassword());
+        selectUser.setEmail(user.getEmail());
+
+        userRepository.save(selectUser); // save함수는 이미 있는 id는 update 시킴
+
+        return selectUser;
+    }
+
+    //@Transactional
+    @PostMapping("/dummy/jsonupdate")
+    @ResponseBody
+    public User testJsonUpdatePost(@RequestBody User user)
+    {
+        User selectUser = userRepository.findByUsername(user.getUsername()).orElseThrow(()->{
+            return new IllegalArgumentException("해당 사용자가 없습니다");
+        });
+
+        selectUser.setUsername(user.getUsername());
+        selectUser.setPassword(user.getPassword());
+        selectUser.setEmail(user.getEmail());
+
+        //이부분을 주석처리하고 이 함수 어노테이션에 @Transactional 적어넣으면 더티체킹 때문에 .save()안써도 db 값이 update 됨
+        userRepository.save(selectUser); // save함수는 이미 있는 id는 update 시킴
+
+        return selectUser;
     }
 }
