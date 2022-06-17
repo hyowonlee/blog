@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, Integer> //<User테�
 
     Optional<User> findByUsername(String username);
 
+    void deleteById(int id);
+    //사실 deleteById 기본적으로도 만들어져있어서 안만들어도 쓸수있지만 헷갈리니 만듬
 }

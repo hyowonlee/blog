@@ -4,6 +4,7 @@ import com.cro.blog.model.RoleType;
 import com.cro.blog.model.User;
 import com.cro.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -140,7 +141,7 @@ public class DummyControllerTest {
         return selectUser;
     }
 
-    //@Transactional
+    @Transactional
     @PostMapping("/dummy/jsonupdate")
     @ResponseBody
     public User testJsonUpdatePost(@RequestBody User user)
@@ -154,8 +155,54 @@ public class DummyControllerTest {
         selectUser.setEmail(user.getEmail());
 
         //이부분을 주석처리하고 이 함수 어노테이션에 @Transactional 적어넣으면 더티체킹 때문에 .save()안써도 db 값이 update 됨
-        userRepository.save(selectUser); // save함수는 이미 있는 id는 update 시킴
+        //userRepository.save(selectUser); // save함수는 이미 있는 id는 update 시킴
 
         return selectUser;
+    }
+
+//    @ResponseBody
+//    @DeleteMapping("/dummy/delete")
+//    public User delete(String username)
+//    {
+//        User deleteUser = userRepository.deleteByUsername(username).orElseThrow(()->{
+//            return new IllegalArgumentException("해당 사용자가 없습니다");
+//        });
+//
+//        return deleteUser;
+//    }
+
+
+
+//    @ResponseBody
+//    @DeleteMapping("/dummy/delete")
+//    public User delete(String username)
+//    {
+//        User selectUser = userRepository.findByUsername(username).orElseThrow(()->{
+//            return new IllegalArgumentException("해당 사용자가 없습니다");
+//        });
+//
+//        userRepository.deleteByUsername(username);
+//
+//        return selectUser;
+//    }
+
+    @ResponseBody
+    @DeleteMapping("/dummy/delete/{username}")
+    public String delete(@PathVariable String username)
+    {
+        User selectUser = userRepository.findByUsername(username).orElseThrow(()->{
+            return new IllegalArgumentException("해당 사용자가 없습니다");
+        });
+
+        try
+        {
+            userRepository.deleteById(selectUser.getId());
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return "delete error: " + e;
+        }
+
+        return "delete username = " + username;
     }
 }

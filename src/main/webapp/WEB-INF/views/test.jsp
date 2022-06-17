@@ -19,13 +19,13 @@
 </form>
 <%--회원검색--%>
 <form action="/dummy/search" method="get">
-    <label>search</label>
+    <label>searchId</label>
     <input type="text" name="id">
     <button>search</button>
 </form>
 <%--회원정보수정--%>
 <form action="/dummy/update" method="post">
-    <label>update</label>
+    <label>updateUsername</label>
     <input type="text" name="username" placeholder="username">
     <input type="password" name="password" placeholder="password">
     <input type="text" name="email" placeholder="email">
@@ -33,7 +33,7 @@
 </form>
 
 <%--json 회원정보수정--%>
-<label>json update</label>
+<label>json update username</label>
 <input type="text" id="jsonUsername" placeholder="username">
 <input type="password" id="jsonPassword" placeholder="password">
 <input type="text" id="jsonEmail" placeholder="email">
@@ -47,11 +47,18 @@
     <button>submit</button>
 </form>
 
+<%--회원정보 삭제--%>
+<label>delete username</label>
+<input type="text" id="jsonDeleteUsername" placeholder="username">
+<button id="jsonDelete">submit</button>
+
+
 </body>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script> <!--jquery import-->
 <script>
-    <%--json 회원정보수정--%>
+
     $(function () {
+        <%--json 회원정보수정--%>
         $('#jsonSubmit').click(function () {
             let data =
                 {
@@ -69,7 +76,22 @@
                     console.log(data)
                 },
                 error: function (request, status, error) {
-                    console.log("error");
+                    console.log(request.responseText);
+                }
+            });
+        });
+
+        <%--ajax 회원정보삭제--%>
+        $('#jsonDelete').click(function () {
+            $.ajax({
+                type: 'delete',
+                url: '/dummy/delete/'+$('#jsonDeleteUsername').val(),
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response)
+                },
+                error: function (request, status, error) {
+                    console.log(request.responseText);
                 }
             });
         });
