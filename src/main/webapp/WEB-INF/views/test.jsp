@@ -65,11 +65,11 @@
                     username: $('#jsonUsername').val(),
                     password: $('#jsonPassword').val(),
                     email: $('#jsonEmail').val()
-                };
+                };/*javascript 객체*/
             $.ajax({
                 type: 'post',
                 url: '/dummy/jsonupdate',
-                data: JSON.stringify(data),
+                data: JSON.stringify(data), /*객체를 전송하려면 객체 자체를 보내면 이해하지 못하니 javascript객체를 json(문자열)로 변환*/
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
