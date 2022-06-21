@@ -34,7 +34,7 @@ public class DummyControllerTest {
 
     @PostMapping("/dummy/join")
     @ResponseBody
-    @Transactional // db의 하나의 작업단위로 어노테이션 적용시 db작업 오류시 롤백이 가능함 그래서 db데이터가 변경되는 작업은 이걸 붙여주는게 좋다
+    @Transactional // db의 하나의 작업단위로 어노테이션 적용시 작업 오류시 롤백이 가능함 그래서 db데이터가 변경되는 작업은 이걸 붙여주는게 좋다
     public String testJoin(User user) // view에서 넘어오는 데이터들을 객체로도 받을수있다 데이터에 대한 필드가 다 존재하기 때문
     {
         System.out.println("id: "+user.getId());
@@ -46,6 +46,11 @@ public class DummyControllerTest {
         System.out.println("updatedate: "+user.getUpdateDate());
 
         user.setRole(RoleType.USER); // enum값 으로 세팅
+
+        if(userRepository.existsByUsername(user.getUsername())) //username 중복 확인
+        {
+            throw new IllegalArgumentException("중복된 username");
+        }
 
         userRepository.save(user); // db에 insert
 
@@ -127,7 +132,7 @@ public class DummyControllerTest {
     //회원정보 update
     @PostMapping("/dummy/update")
     @ResponseBody
-    @Transactional // db의 하나의 작업단위로 어노테이션 적용시 db작업 오류시 롤백이 가능함 그래서 db데이터가 변경되는 작업은 이걸 붙여주는게 좋다
+    @Transactional // db의 하나의 작업단위로 어노테이션 적용시 작업 오류시 롤백이 가능함 그래서 db데이터가 변경되는 작업은 이걸 붙여주는게 좋다
     public User testUpdatePost(User user)
     {
         User selectUser = userRepository.findByUsername(user.getUsername()).orElseThrow(()->{
@@ -145,7 +150,7 @@ public class DummyControllerTest {
 
     @PostMapping("/dummy/jsonupdate")
     @ResponseBody
-    @Transactional // db의 하나의 작업단위로 어노테이션 적용시 db작업 오류시 롤백이 가능함 그래서 db데이터가 변경되는 작업은 이걸 붙여주는게 좋다
+    @Transactional // db의 하나의 작업단위로 어노테이션 적용시 작업 오류시 롤백이 가능함 그래서 db데이터가 변경되는 작업은 이걸 붙여주는게 좋다
     public User testAjaxJsonUpdatePost(@RequestBody User user)
     {
         User selectUser = userRepository.findByUsername(user.getUsername()).orElseThrow(()->{
@@ -190,7 +195,7 @@ public class DummyControllerTest {
 
     @ResponseBody
     @DeleteMapping("/dummy/delete/{username}")
-    @Transactional // db의 하나의 작업단위로 어노테이션 적용시 db작업 오류시 롤백이 가능함 그래서 db데이터가 변경되는 작업은 이걸 붙여주는게 좋다
+    @Transactional // db의 하나의 작업단위로 어노테이션 적용시 작업 오류시 롤백이 가능함 그래서 db데이터가 변경되는 작업은 이걸 붙여주는게 좋다
     public String ajaxJsonDelete(@PathVariable String username)
     {
         User selectUser = userRepository.findByUsername(username).orElseThrow(()->{
@@ -209,5 +214,18 @@ public class DummyControllerTest {
         }
 
         return "delete username = " + username; // view단에서 ajax로 처리하기에 결과가 view단의 ajax 요청함수의 return으로 들어감 (test.jsp의 error: success: function (response) 이쪽으로 리턴이 들어감)
+    }
+
+    @ResponseBody
+    @DeleteMapping("/dummy/delete")
+    @Transactional
+    public User testDelete(String username)
+    {
+        User selectUser = userRepository.findByUsername(username).orElseThrow(()->{
+            return new IllegalArgumentException("해당 사용자가 없습니다");
+        });
+
+        userRepository.deleteByUsername(selectUser.getUsername());
+        return selectUser;
     }
 }

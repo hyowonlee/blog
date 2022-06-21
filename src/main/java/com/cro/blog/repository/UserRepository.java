@@ -16,4 +16,8 @@ public interface UserRepository extends JpaRepository<User, Integer> //<User테�
 
     void deleteById(int id);
     //사실 deleteById 기본적으로도 만들어져있어서 안만들어도 쓸수있지만 헷갈리니 만듬
+
+    void deleteByUsername(String username);
+
+    boolean existsByUsername(String username); // 해당 데이터가 db에 존재하는지 확인하기 위해 existsBy를 사용할 수 있음 존재시 t 없을시 f
 }

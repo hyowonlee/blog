@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -47,11 +48,17 @@
     <button>submit</button>
 </form>
 
-<%--회원정보 삭제--%>
-<label>delete username</label>
+<%--ajax 회원정보 삭제--%>
+<label>ajax delete username</label>
 <input type="text" id="jsonDeleteUsername" placeholder="username">
 <button id="jsonDelete">submit</button>
 
+<%--form:form 회원정보 삭제 일반 form태그론 put delete요청 불가--%>
+<form:form action="/dummy/delete" method="delete">
+    <label>form:form delete username</label>
+    <input type="text" name="username" placeholder="username">
+    <button>submit</button>
+</form:form>
 
 </body>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script> <!--jquery import-->
