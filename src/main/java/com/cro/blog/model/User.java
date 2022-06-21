@@ -23,7 +23,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 넘버링 전략, 연결된 db의 넘버링 전략을 따라간다(mysql이니 auto-increment), application.yml에서 jpa의 기본 넘버링 전략을 따라가지 않게 false로 해놓고 db따라가게 적용해놓은것
     private int id; // PK, auto-increment로 넘버링 할것
 
-    @Column(nullable = false, length = 30) // null이 되면 안되니 not null 설정, 길이 제한 설정
+    @Column(nullable = false, length = 30, unique = true) // null이 되면 안되니 not null 설정, 길이 제한 설정, 중복안되게 설정
     private String username; // id
 
     @Column(nullable = false, length = 100) //해시화 되면 길이가 길어지니 길이 제한 길게함

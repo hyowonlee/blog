@@ -47,7 +47,7 @@ public class DummyControllerTest {
 
         user.setRole(RoleType.USER); // enum값 으로 세팅
 
-        if(userRepository.existsByUsername(user.getUsername())) //username 중복 확인
+        if(userRepository.existsByUsername(user.getUsername())) //username 중복 확인, User.java에 username unique를 걸어놓긴 했음 근데 existsBy 때문에 넣어봄
         {
             throw new IllegalArgumentException("중복된 username");
         }
@@ -151,7 +151,7 @@ public class DummyControllerTest {
     @PostMapping("/dummy/jsonupdate")
     @ResponseBody
     @Transactional // db의 하나의 작업단위로 어노테이션 적용시 작업 오류시 롤백이 가능함 그래서 db데이터가 변경되는 작업은 이걸 붙여주는게 좋다
-    public User testAjaxJsonUpdatePost(@RequestBody User user)
+    public User testAjaxJsonUpdatePost(@RequestBody User user) // json 데이터로 들어오니 @RequestBody를 통해 들어온 json 데이터를 메시지 컨버터인 jackson 라이브러리로 java 객체로 변환
     {
         User selectUser = userRepository.findByUsername(user.getUsername()).orElseThrow(()->{
             return new IllegalArgumentException("해당 사용자가 없습니다");

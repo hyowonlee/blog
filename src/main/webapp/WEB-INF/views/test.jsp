@@ -1,4 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> <%--form:form태그 import--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -93,7 +93,7 @@
             $.ajax({
                 type: 'delete',
                 url: '/dummy/delete/'+$('#jsonDeleteUsername').val(),
-                dataType: 'json',
+                //dataType: 'json',  //여기선 데이터를 안보내는데 이게 필요할까? 없어도 됨
                 success: function (response) {
                     console.log(response)
                 },
