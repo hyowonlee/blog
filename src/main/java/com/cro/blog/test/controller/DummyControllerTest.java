@@ -3,6 +3,9 @@ package com.cro.blog.test.controller;
 import com.cro.blog.model.RoleType;
 import com.cro.blog.model.User;
 import com.cro.blog.repository.UserRepository;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -10,11 +13,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 @Controller
@@ -227,5 +233,36 @@ public class DummyControllerTest {
 
         userRepository.deleteByUsername(selectUser.getUsername());
         return selectUser;
+    }
+
+    //스팀 news 가져오기 test
+    @GetMapping("/dummy/steam")
+    public String test(Model model)
+    {
+        try {
+            URL url = new URL("https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?AppID=1090630");
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+            String result = bufferedReader.readLine();
+
+            JSONParser jsonParser = new JSONParser();
+            JSONObject json = (JSONObject)jsonParser.parse(result);
+            JSONObject appNews = (JSONObject)json.get("appnews");
+            JSONArray newsItems = (JSONArray)appNews.get("newsitems");
+            System.out.println(appNews.get("appid"));
+
+            for (int i = 0 ; i < newsItems.size() ; i++) {
+                JSONObject newsItem = (JSONObject)newsItems.get(i);
+                System.out.println(newsItem.get("title"));
+                model.addAttribute("appid"+i, newsItem.get("title"));
+            }
+
+            model.addAttribute("appid", appNews.get("appid"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "steamTest";
     }
 }

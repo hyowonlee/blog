@@ -60,6 +60,12 @@
     <button>submit</button>
 </form:form>
 
+<!--스팀뉴스 가져오기 test-->
+<form action="/dummy/steam" method="get">
+    <button>steam</button>
+</form>
+
+
 </body>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script> <!--jquery import-->
 <script>
