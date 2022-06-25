@@ -20,6 +20,7 @@ import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -251,13 +252,17 @@ public class DummyControllerTest {
             JSONArray newsItems = (JSONArray)appNews.get("newsitems");
             System.out.println(appNews.get("appid"));
 
-            for (int i = 0 ; i < newsItems.size() ; i++) {
-                JSONObject newsItem = (JSONObject)newsItems.get(i);
-                System.out.println(newsItem.get("title"));
-                model.addAttribute("appid"+i, newsItem.get("title"));
-            }
-
             model.addAttribute("appid", appNews.get("appid"));
+
+//            List<String> set = new ArrayList<String>();
+//            for (int i = 0 ; i < newsItems.size() ; i++) {
+//                JSONObject newsItem = (JSONObject)newsItems.get(i);
+//                System.out.println(newsItem.get("title"));
+//                set.add(newsItem.get("title").toString());
+//            }
+//            model.addAttribute("title", set);
+
+            model.addAttribute("newsItems", newsItems);
 
         } catch (Exception e) {
             e.printStackTrace();
