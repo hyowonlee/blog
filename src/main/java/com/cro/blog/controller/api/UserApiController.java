@@ -28,4 +28,20 @@ public class UserApiController {
 
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // 성공시 1 리턴
     }
+
+    // 회원가입 - username 중복확인
+    @PostMapping("/api/user/join/checkusername")
+    public ResponseDto<Integer> checkUsername(@RequestBody String username)
+    {
+        System.out.println("UserApiController.checkUsername()");
+
+        if(!userService.checkUsername(username)) // 없는 username은 1 return
+        {
+            return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // user.js checkUsername에서 data값으로 검증
+        }
+        else // username 이미 있으면 -1 return
+        {
+            return new ResponseDto<Integer>(HttpStatus.INTERNAL_SERVER_ERROR.value(), -1);
+        }
+    }
 }

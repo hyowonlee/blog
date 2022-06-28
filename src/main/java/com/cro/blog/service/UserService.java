@@ -20,4 +20,10 @@ public class UserService {
     {
         userRepository.save(user); // db에 insert
     }
+
+    // 회원가입 - username 중복확인
+    public boolean checkUsername(String username)
+    {
+        return userRepository.existsByUsername(username);
+    }
 }
