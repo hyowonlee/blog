@@ -1,5 +1,7 @@
 package com.cro.blog.exceptionhandler;
 
+import com.cro.blog.dto.ResponseDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +19,9 @@ public class GlobalExceptionHandler {
 //    }
 
     @ExceptionHandler(value = Exception.class) // 일단 강의에서 이렇게해서 모든 Exception에 대해서 처리하도록 여기다 해놓긴 할건데 나중에 바꾸자
-    public String handleArgumentException(Exception e)
+    public ResponseDto<String> handleArgumentException(Exception e)
     {
-        return "<h1>" + e.getMessage() + "</h1>";
+        return new ResponseDto<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
+        //return "<h1>" + e.getMessage() + "</h1>";
     }
 }

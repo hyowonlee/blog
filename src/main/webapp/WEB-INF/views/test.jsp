@@ -98,13 +98,13 @@
         $('#jsonDelete').click(function () {
             $.ajax({
                 type: 'delete',
-                url: '/dummy/delete/'+$('#jsonDeleteUsername').val(),
+                url: '/dummy/delete/' + $('#jsonDeleteUsername').val(),
                 //dataType: 'json',  //여기선 데이터를 안보내는데 이게 필요할까? 없어도 됨
                 success: function (response) {
                     console.log(response)
                 },
-                error: function (request, status, error) {
-                    console.log(request.responseText);
+                error: function (response, status, error) {
+                    console.log(response.responseText);
                 }
             });
         });

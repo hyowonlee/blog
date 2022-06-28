@@ -20,13 +20,13 @@ import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
 @Controller
 public class DummyControllerTest {
 
+    //생성자 주입
     @Autowired
     public DummyControllerTest(UserRepository userRepository) {
         this.userRepository = userRepository;
