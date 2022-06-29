@@ -22,6 +22,8 @@ public class UserService {
     }
 
     // 회원가입 - username 중복확인
+    @Transactional // select는 값 변경이 없으니 트랜잭션 안붙여도 되지 않나? 라고 생각할 수 있지만 데이터의 정합성을 위해 select도 붙인다,
+    // 만약 한 기능에서 select를 2번해야되는데 1번 select하고 중간에 다른곳에서 값이 수정되서 commit될 경우 2번째 select에선 값이 바뀔수 있으니 select문에도 transactional을 붙여 트랜잭션으로 만들면 항상 내 실행시점 이전의 데이터를 들고와줌, 그래서 같은데이터를 들고와 정합성을 유지해줌
     public boolean checkUsername(String username)
     {
         return userRepository.existsByUsername(username);
