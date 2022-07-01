@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> <%--jquery import--%>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/header.js"></script>
 </head>
 <body>
 
@@ -18,12 +19,12 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto"> <%--ml-auto is right align--%>
             <li class="nav-item">
-                <a class="nav-link" href="/user/loginForm">로그인</a>
+                <a id="userloginForm" class="nav-link" href="/user/loginForm">로그인</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/user/joinForm">회원가입</a>
+                <a id="userjoinForm" class="nav-link" href="/user/joinForm">회원가입</a>
             </li>
         </ul>
     </div>
