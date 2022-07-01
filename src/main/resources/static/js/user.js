@@ -1,6 +1,11 @@
 let index = { // javascript 객체
     //javascript의 key: value
     init: function () {
+
+        //화살표함수를 쓰는 이유는 this를 바인딩하기 위해서임 코드를 줄이기 위해서가 아님 여기서 function(){}로 사용하면 this가 이 index변수가 아닌 윈도우객체를 가리킴
+		//만약 꼭 function으로 써야겠다 한다면 위의 index 시작부분에서 let _this = this 처럼 index를 가리키는 this를 만들어서 그거로  function(){} 이 안에서 사용해야됨
+        //화살표 함수를 쓰면 화살표함수의 바깥쪽 this가 this가 된다 = > 호출할 때 정해진다 그래서 여기선 밖인 index변수를 this가 가리키는것 만약 객체가 아닌 최상단에서 화살표함수를 쓰면
+        //웹브라우저인 window객체를 가리킬것 최상단에서 function(){}을 쓰면 그 html문서인 document객체를 가리킬것
         $("#btn-save").on("click", () => {
             this.save();
         });
