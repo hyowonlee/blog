@@ -1,0 +1,2 @@
+/*ajax 본문 로딩하기 위해 a태그의 href를 다 없애서 포인터 모양이 안바뀌길래 css로 처리했음 https://blog.outsider.ne.kr/223*/
+a {cursor:pointer;}
