@@ -40,7 +40,7 @@ public class Board {
     //mappedBy를 세팅하면 이 클래스가 FK를 가진 연관관계의 주인이 아님 즉 board와 reply의 FK컬럼은 reply테이블에 만들것
     //그렇다면 이 onetomany는 board를 select시 join을 통해 값을 얻어오기 위해 필요한 것, mappedBy = "board"는 Reply 클래스에 있는 board 필드를 의미하는 것 (mappedBy를 쓰면 이 멤버는 연관관계의 주인이 아니라는거 이건 Reply.java에서 설명)
     //reply는 one to many라 여러건이 있을수도 있음 그래서 필요할때만 들고오게 lazy 전략이 기본임(onetomany의 기본전략은 lazy fetch 안써주면 lazy)
-    //하지만 우리는 ui를 항상 댓글이 보이게 하려고 하니 eager전략으로 바꾼다다    //@JoinColumn(name = "replyId") 이건 안씀 // 이 답글은 Reply 클래스에서 Board를 FK로 가지고 가기에 이 테이블에 FK column을 만들 필요가 없음
+    //하지만 우리는 ui를 항상 댓글이 보이게 하려고 하니 eager전략으로 바꾼다다    //@JoinColumn(name = "replyId") 이건 안씀 // 이 답글은 Reply 클래스에서 Board를 FK로 가지고 가기에 이 테이블에 FK column을 만들 필요가 없음 (여기에 fk가 만들어지면 여러개가 들어갈수있으니 원자성이 위배됨)
     //만약 여기서 FK를 만들면 reply가 여러개인경우 reply column에 값이 하나가 아닐수있으니 원자성이 위배됨 그래서 여기서 만들면 안됨
     private List<Reply> reply; // @OneToMany는 이 클래스에 여러개가 들어올 수 있으니 List로 세팅
 
