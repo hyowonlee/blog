@@ -12,8 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/headerIndex.js"></script>
 </head>
-<body>
 
+<body class="d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a id='index' class="navbar-brand">Collapsible Navbar</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
