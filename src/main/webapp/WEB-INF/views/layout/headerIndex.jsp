@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %> <!-- html 태그들이 있는 라이브러리를 가져옴(태그라이브러리) 여기서 가져온걸 쓰려면 접두사prefix에 c를 붙여라 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,14 +21,32 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav ml-auto"> <%--ml-auto is right align--%>
-            <li class="nav-item">
-                <a id="/user/loginForm" class="nav-link">로그인</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
-            </li>
-            <li class="nav-item">
-                <a id="/user/joinForm" class="nav-link">회원가입</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
-            </li>
-        </ul>
+    <%--  jstl  --%>
+    <c:choose>
+        <c:when test="${empty sessionScope.principal}"> <!-- 로그인 아직 안됐을땐(세션이 비어있으면) 이거 -->
+            <ul class="navbar-nav ml-auto"> <%--ml-auto is right align--%>
+                <li class="nav-item">
+                    <a id="/user/loginForm" class="nav-link">로그인</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                </li>
+                <li class="nav-item">
+                    <a id="/user/joinForm" class="nav-link">회원가입</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                </li>
+            </ul>
+        </c:when>
+        <c:otherwise> <!-- 로그인 됐을땐(세션이 있으면) 이거 -->
+           <ul class="navbar-nav ml-auto"> <%--ml-auto is right align--%>
+                <li class="nav-item">
+                    <a id="/board/writeForm" class="nav-link">글쓰기</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                </li>
+                <li class="nav-item">
+                    <a id="/user/userForm" class="nav-link">회원정보</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                </li>
+                <li class="nav-item">
+                    <a id="/user/logout" class="nav-link">로그아웃</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                </li>
+            </ul>
+        </c:otherwise>
+    </c:choose>
     </div>
 </nav>
 <br />

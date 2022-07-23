@@ -4,8 +4,7 @@ import com.cro.blog.model.User;
 import com.cro.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,10 +21,17 @@ public class UserService {
     }
 
     // 회원가입 - username 중복확인
-    @Transactional // select는 값 변경이 없으니 트랜잭션 안붙여도 되지 않나? 라고 생각할 수 있지만 데이터의 정합성을 위해 select도 붙인다,
+    @Transactional(readOnly = true) // readOnly옵션을통해 select 할때 트랜잭션 시작, 서비스 종료시에 트랜잭션을 종료해 데이터 정합성을 유지해줌
+    // select는 값 변경이 없으니 트랜잭션 안붙여도 되지 않나? 라고 생각할 수 있지만 데이터의 정합성을 위해 select도 붙인다,
     // 만약 한 기능에서 select를 2번해야되는데 1번 select하고 중간에 다른곳에서 값이 수정되서 commit될 경우 2번째 select에선 값이 바뀔수 있으니 select문에도 transactional을 붙여 트랜잭션으로 만들면 항상 내 실행시점 이전의 데이터를 들고와줌, 그래서 같은데이터를 들고와 정합성을 유지해줌
     public boolean checkUsername(String username)
     {
         return userRepository.existsByUsername(username);
+    }
+
+    @Transactional(readOnly = true) // readOnly옵션을통해 select 할때 트랜잭션 시작, 서비스 종료시에 트랜잭션을 종료해 데이터 정합성을 유지해줌
+    public User login(User user)
+    {
+        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 }
