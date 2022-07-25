@@ -1,4 +1,4 @@
-let index = { // javascript 객체
+var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선언되어서 같은이름 여러번 선언 가능한 var로 했음 let은 안됨
     //javascript의 key: value
     init: function () {
 

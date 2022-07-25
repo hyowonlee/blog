@@ -23,26 +23,26 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <%--  jstl  --%>
     <c:choose>
-        <c:when test="${empty sessionScope.principal}"> <!-- 로그인 아직 안됐을땐(세션이 비어있으면) 이거 -->
+        <c:when test="${empty sessionScope.principal}"> <!-- 로그인 아직 안됐을땐(세션이 비어있으면) 이거, 로그인시 principal이라는 key 이름으로 객체를 세션에 바인딩했음-->
             <ul class="navbar-nav ml-auto"> <%--ml-auto is right align--%>
                 <li class="nav-item">
-                    <a id="/user/loginForm" class="nav-link">로그인</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                    <a id="/loginForm" class="nav-link">로그인</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
                 </li>
                 <li class="nav-item">
-                    <a id="/user/joinForm" class="nav-link">회원가입</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                    <a id="/joinForm" class="nav-link">회원가입</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
                 </li>
             </ul>
         </c:when>
         <c:otherwise> <!-- 로그인 됐을땐(세션이 있으면) 이거 -->
            <ul class="navbar-nav ml-auto"> <%--ml-auto is right align--%>
                 <li class="nav-item">
-                    <a id="/board/writeForm" class="nav-link">글쓰기</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                    <a id="/board/form" class="nav-link">글쓰기</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
                 </li>
                 <li class="nav-item">
-                    <a id="/user/userForm" class="nav-link">회원정보</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                    <a id="/user/form" class="nav-link">회원정보</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
                 </li>
                 <li class="nav-item">
-                    <a id="/user/logout" class="nav-link">로그아웃</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                    <a id="/logout" class="nav-link">로그아웃</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
                 </li>
             </ul>
         </c:otherwise>
