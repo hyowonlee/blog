@@ -21,7 +21,7 @@ public class UserApiController {
 
 
     //회원가입
-    @PostMapping("/api/user/join")
+    @PostMapping("/auth/api/user/join")
     public ResponseDto<Integer> join(@RequestBody User user)
     {
         System.out.println("UserApiController.join()");
@@ -34,7 +34,7 @@ public class UserApiController {
     }
 
     // 회원가입 - username 중복확인
-    @PostMapping("/api/user/join/checkusername")
+    @PostMapping("/auth/api/user/join/checkusername")
     public ResponseDto<Integer> checkUsername(@RequestBody String username)
     {
         System.out.println("UserApiController.checkUsername()");

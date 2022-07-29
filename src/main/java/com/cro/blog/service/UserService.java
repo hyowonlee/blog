@@ -29,9 +29,11 @@ public class UserService {
         return userRepository.existsByUsername(username);
     }
 
-    @Transactional(readOnly = true) // readOnly옵션을통해 select 할때 트랜잭션 시작, 서비스 종료시에 트랜잭션을 종료해 데이터 정합성을 유지해줌
-    public User login(User user)
-    {
-        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-    }
+
+//    // 시큐리티를 사용하지 않은 전통적 로그인
+//    @Transactional(readOnly = true) // readOnly옵션을통해 select 할때 트랜잭션 시작, 서비스 종료시에 트랜잭션을 종료해 데이터 정합성을 유지해줌
+//    public User login(User user)
+//    {
+//        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+//    }
 }

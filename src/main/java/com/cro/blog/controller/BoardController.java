@@ -11,7 +11,7 @@ public class BoardController {
         return "layout/headerIndex";
     }
 
-    @GetMapping("index")
+    @GetMapping("/index")
     public String index() { // 홈페이지 이용중 메인페이지로 이동시 ajax로 본문만 갈아끼우기 위한 컨트롤러
         return "index";
     }

@@ -21,7 +21,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a id='index' class="navbar-brand">Collapsible Navbar</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+    <a id='/index' class="navbar-brand">Collapsible Navbar</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -31,10 +31,10 @@
         <c:when test="${empty principal}"> <!-- 로그인 아직 안됐을땐(세션이 비어있으면) 이거, 전통로그인에선 로그인시 principal이라는 key 이름으로 객체를 세션에 바인딩했음 시큐리티 로그인에선 위에서 세션객체인 principal을 변수 principal에 매핑함-->
             <ul class="navbar-nav ml-auto"> <%--ml-auto is right align--%>
                 <li class="nav-item">
-                    <a id="/loginForm" class="nav-link">로그인</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                    <a id="/auth/loginForm" class="nav-link">로그인</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
                 </li>
                 <li class="nav-item">
-                    <a id="/joinForm" class="nav-link">회원가입</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                    <a id="/auth/joinForm" class="nav-link">회원가입</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
                 </li>
             </ul>
         </c:when>
