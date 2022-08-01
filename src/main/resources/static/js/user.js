@@ -53,14 +53,16 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
         $.ajax({
             type: 'POST',
             url: '/auth/api/user/join/checkusername',
-            data: $('#input-username').val(),
+            data: $('#username').val(),
+            //data: $('#input-username').val(),
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function (response) {
             if (response.data == 1) { // 서버로 부터 정상 return일 경우 사용가능 username
                 alert("사용가능한 username 입니다");
                 $('#btn-save').attr("disabled", false); // 버튼 활성화,비활성화
-                $('#input-username').attr("disabled", true); // 버튼 활성화,비활성화
+                $('#username').attr("disabled", true); // 버튼 활성화,비활성화
+                //$('#input-username').attr("disabled", true); // 버튼 활성화,비활성화
             } else {
                 alert("사용중인 username 입니다");
             }

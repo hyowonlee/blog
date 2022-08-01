@@ -7,6 +7,7 @@ import com.cro.blog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,14 +20,11 @@ public class UserApiController {
 
     private final UserService userService; // lombok의 @RequiredArgsConstructor를 이용한 생성자 주입
 
-
     //회원가입
     @PostMapping("/auth/api/user/join")
     public ResponseDto<Integer> join(@RequestBody User user)
     {
         System.out.println("UserApiController.join()");
-
-        user.setRole(RoleType.USER); // view에서 안가져온 데이터 세팅
 
         userService.join(user); // 만약 에러나면 GlobalExceptionHandler.java에서 에러 잡아서 리턴될것
 

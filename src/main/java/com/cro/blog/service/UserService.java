@@ -1,8 +1,10 @@
 package com.cro.blog.service;
 
+import com.cro.blog.model.RoleType;
 import com.cro.blog.model.User;
 import com.cro.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,11 +14,21 @@ public class UserService {
 
     private final UserRepository userRepository; // lombok의 @RequiredArgsConstructor를 이용한 생성자 주입
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder; // lombok의 @RequiredArgsConstructor를 이용한 생성자 주입 (원본 객체는 SecurityConfig.java에 있음)
+
     // 회원가입
     // exception시 GlobalExceptionHandler.java에서 에러 잡아서 리턴될것
     @Transactional // 이 회원가입 로직을 트랜잭션으로 등록, 성공시 db commit 실패시 rollback될것
     public void join(User user)
     {
+        String rawPassword = user.getPassword(); // 비밀번호 원문
+
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword); // 해쉬화된 비밀번호
+
+        user.setPassword(encPassword);
+
+        user.setRole(RoleType.USER); // view에서 안가져온 데이터 세팅
+
         userRepository.save(user); // db에 insert
     }
 

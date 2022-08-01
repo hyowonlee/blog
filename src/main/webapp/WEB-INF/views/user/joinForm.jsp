@@ -6,7 +6,8 @@
 
     <div class="form-group">
         <label for="username">Username</label>
-        <input id="input-username" type="text" class="form-control" placeholder="Enter Username" id="username">
+<%--        <input id="input-username" type="text" class="form-control" placeholder="Enter Username" id="username">--%>
+        <input id="username" type="text" class="form-control" placeholder="Enter Username" id="username">
         <button id="btn-checkUsername" class="btn btn-primary">중복확인</button>
     </div>
 
