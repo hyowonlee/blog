@@ -1,18 +1,13 @@
 package com.cro.blog.controller.api;
 
 import com.cro.blog.dto.ResponseDto;
-import com.cro.blog.model.RoleType;
 import com.cro.blog.model.User;
 import com.cro.blog.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpSession;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,7 +43,7 @@ public class UserApiController {
     }
 
 //    @Autowired
-//    private HttpSession session; // 세션은 스프링에서 컨트롤러의 매개변수로 적어주면 자동으로 받을 수 있고 또는 세션객체는 스프링 컨테이너가 빈등록해 가지고있으니 @Autowired해서 받을 수 있다 (HtpSession)
+//    private HttpSession session; // 세션은 스프링에서 컨트롤러의 매개변수로 적어주면 자동으로 받을 수 있고 또는 세션객체는 스프링 컨테이너가 빈등록해 가지고있으니 @Autowired해서 받을 수 있다 (HttpSession)
 //
 //    // 스프링 시큐리티 안쓰는 일반 로그인
 //    @PostMapping("api/user/login")

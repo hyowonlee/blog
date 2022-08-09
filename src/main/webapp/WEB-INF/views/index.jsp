@@ -5,29 +5,29 @@
 <div class="container">
 
     <div class="card m-2">
-        <img class="card-img-top" src="img_avatar1.png" alt="Card image">
+        <%--<img class="card-img-top" src="#" alt="Card image">--%>
         <div class="card-body">
             <h4 class="card-title">card-title</h4>
             <p class="card-text">card-text</p>
-            <a href="#" class="btn btn-primary">href</a>
+            <%--<a href="#" class="btn btn-primary">href</a>--%>
         </div>
     </div>
 
     <div class="card m-2">
-        <img class="card-img-top" src="img_avatar1.png" alt="Card image">
+        <%--<img class="card-img-top" src="#" alt="Card image">--%>
         <div class="card-body">
             <h4 class="card-title">card-title</h4>
             <p class="card-text">card-text</p>
-            <a href="#" class="btn btn-primary">href</a>
+            <%--<a href="#" class="btn btn-primary">href</a>--%>
         </div>
     </div>
 
     <div class="card m-2">
-        <img class="card-img-top" src="img_avatar1.png" alt="Card image">
+        <%--<img class="card-img-top" src="#" alt="Card image">--%>
         <div class="card-body">
             <h4 class="card-title">card-title</h4>
             <p class="card-text">card-text</p>
-            <a href="#" class="btn btn-primary">href</a>
+            <%--<a href="#" class="btn btn-primary">href</a>--%>
         </div>
     </div>
 

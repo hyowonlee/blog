@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> <%--pom.xml에서 추가한 spring security 태그 라이브러리를 가져옴 시큐리티 공식문서:https://docs.spring.io/spring-security/site/docs/3.0.x/reference/el-access.html--%>
 <sec:authorize access="isAuthenticated()">
     <%--  스프링 시큐리티는 로그인 성공 시 스프링이 세션을 만들어서 principal이라는 곳에 저장해줌 --%>
-    <sec:authentication property="principal" var="principal"/> <!-- 위의 공식문서 보면 principal에서 현재 유저의 principal(접속주체,세션)객체를 가지고있다고 하는데 그래서 property(재산)에 principal을 변수 principal에 저장해줌 -->
+    <sec:authentication property="principal" var="principal"/> <!-- 위의 공식문서 보면 property principal에서 현재 유저의 principal(접속주체,세션)객체를 가지고있다고 하는데 그래서 property(재산)에 principal을 변수 principal에 저장해줌 -->
 </sec:authorize>
 <!DOCTYPE html>
 <html lang="ko">
@@ -47,7 +47,7 @@
                     <a id="/user/form" class="nav-link">회원정보</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
                 </li>
                 <li class="nav-item">
-                    <a id="/logout" class="nav-link">로그아웃</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                    <a href="/logout" class="nav-link">로그아웃</a> <%-- 이건 페이지가 리로딩 돼야 정보가 업데이트 되니 href로 리다이렉트 --%>
                 </li>
             </ul>
         </c:otherwise>
@@ -57,7 +57,7 @@
 <br />
 
 <div id="bodyContents">
-    <%@ include file="../index.jsp"%> <%--첫 홈페이지 요청시에 본문에 아무것도 없으면 안되니 처음엔 index 본문을 로딩--%>
+<%--    <%@ include file="../index.jsp"%> &lt;%&ndash;첫 홈페이지 요청시에 본문에 아무것도 없으면 안되니 처음엔 index 본문을 로딩&ndash;%&gt;--%>
 </div>
 
 
