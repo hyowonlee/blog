@@ -9,6 +9,14 @@
 $((function () { // header.jsp의 위쪽 head에 script가 있어서 html body태그를 먼저 읽어야 해당 태그에 클래스를 추가 할 수 있어서 전부 로드 실행되는 ready() 사용이지만 대신 같은역할의 권장하는 $()사용
         $("a").on("click", function () {
             link = $(this).attr("id"); //여기선 this로 html문서에 있는 클릭한 a태그를 찾는거니 화살표함수가 아닌 function으로 사용 (user.js에 this 바인딩 설명 써놓음)
+            if(link == undefined)
+            {
+                // 스프링 시큐리티 로그아웃을 하니까 로그아웃 버튼에 id를 빼고 a href 로 /logout으로 보냈는데 a태그 클릭이라 여기 함수로 들어왔음 근데 id 가 없으니 link에 아무것도 안들어가게 되었고
+                // ajax 로 "" 페이지를 가져오게 되어서 의도치 않게 BoardController.java의 headerIndex()를 로그아웃 버튼 누를때 한번 로그아웃하고 메인페이지로 돌아갈때 한번 해서
+                // 2번 부르게되었음 그래서 만약 id가 아무것도 없는 a를 클릭시 link에 undefined라는 값을 가져가는데 이게 그냥 밑에 ajax로 넘어가면 "" 페이지를 부르니
+                // 예외처리해서 아무것도 안하게 해준것
+                return ;
+            }
             $.ajax({
                 method: 'GET',
                 url: link,

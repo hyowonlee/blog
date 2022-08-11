@@ -14,7 +14,7 @@ public class BoardController {
 
     @GetMapping({"", "/"})
     // 첫 홈페이지 요청 컨트롤러로 본문에 메인페이지 index를 포함한 header 요청
-    public String headerIndex(@AuthenticationPrincipal PrincipalDetail principalDetail) { // 세션 가져오려면 @AuthenticationPrincipal이 매개변수로 세션 받아주면 됨 아니면 위 주석처럼 di 해도 접근가능
+    public String headerIndex(@AuthenticationPrincipal PrincipalDetail principalDetail) { // 스프링 시큐리티에서 세션 가져오려면 @AuthenticationPrincipal이 매개변수로 세션 받아주면 됨 아니면 위 주석처럼 di 해도 접근가능
         System.out.println("로그인 사용자 아이디:"+principalDetail);
         return "layout/headerIndex";
     }
