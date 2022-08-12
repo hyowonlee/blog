@@ -40,7 +40,7 @@ public class SecurityConfig { //WebSecurityConfigurerAdapter가 deprecated 되�
             .authenticated() // 인증이 필요함
         .and()
             .formLogin()
-            .loginPage("/auth/loginForm")
+            .loginPage("/auth/securityLoginForm") // 스프링 시큐리티용 로그인 url
             .loginProcessingUrl("/auth/api/login") // 스프링 시큐리티가 해당 주소로 요청오는 로그인을 가로재서 대신 로그인 수행함
             .defaultSuccessUrl("/") // 정상종료시 redirect
         .and()

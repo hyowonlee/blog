@@ -17,4 +17,11 @@ public class UserController {
     {
         return "user/loginForm";
     }
+
+    // 시큐리티 로그인 용 로그인 페이지 컨트롤러
+    @GetMapping("/auth/securityLoginForm") // 시큐리티에서 자동으로 로그인페이지로 보낼때 헤더랑 context를 ajax로 같이 로딩해야되니 컨트롤러에선 헤더를 로딩하고 js에서 context 로딩
+    public String securityLoginForm()
+    {
+        return "layout/headerIndex";
+    }
 }
