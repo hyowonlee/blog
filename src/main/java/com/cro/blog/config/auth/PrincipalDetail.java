@@ -1,6 +1,8 @@
 package com.cro.blog.config.auth;
 
 import com.cro.blog.model.User;
+import lombok.Data;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +11,7 @@ import java.util.Collection;
 
 // 스프링시큐리티가 로그인요청을 가로채서 로그인을 진행하고 완료가 되면 userDetails 타입의 오브젝트를
 // 스프링 시큐리티의 고유한 세션저장소에 저장을 해줌
+@Getter
 public class PrincipalDetail implements UserDetails {
     private User user; // 컴포지션 : 객체를 클래스 안에 품고있는걸 컴포지션이라함
 

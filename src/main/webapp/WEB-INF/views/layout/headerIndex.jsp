@@ -13,9 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/htmlTag.css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> <%--jquery import--%>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="/js/headerIndex.js"></script>
 </head>
 
@@ -41,10 +43,10 @@
         <c:otherwise> <!-- 로그인 됐을땐(세션이 있으면) 이거 -->
            <ul class="navbar-nav ml-auto"> <%--ml-auto is right align--%>
                 <li class="nav-item">
-                    <a id="/board/form" class="nav-link">글쓰기</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                    <a id="/board/saveForm" class="nav-link">글쓰기</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
                 </li>
                 <li class="nav-item">
-                    <a id="/user/form" class="nav-link">회원정보</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
+                    <a id="/user/updateForm" class="nav-link">회원정보</a> <%-- a태그들은 headerIndex.js에서 본문 ajax 로딩하기위해서 href를 다 없애고 js파일에서 url 로딩해줌 --%>
                 </li>
                 <li class="nav-item">
                     <a href="/logout" class="nav-link">로그아웃</a> <%-- 이건 페이지가 리로딩 돼야 정보가 업데이트 되니 href로 리다이렉트 --%>

@@ -11,6 +11,8 @@ public interface UserRepository extends JpaRepository<User, Integer> //<User테�
 {
     //JPA Naming 전략 : JPA는 함수 이름을 쿼리문을 만들어서 db에 접근하는데 그 규칙이 jpa naming 전략
 
+    //DB에 INSERT하는 save 함수는 이미 만들어져 있음 따로 안만들어도 됨
+
     Optional<User> findById(int id); // Optional 객체가 null 처리가 쉬워서 아무것도 못가져오는 null상태 처리를 위해 Optional로 반환함
     //사실 findById는 기본적으로도 만들어져있어서 안만들어도 쓸수있지만 헷갈리니 만듬
 
