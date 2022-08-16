@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -23,4 +25,10 @@ public class BoardService {
         boardRepository.save(board); // db에 insert
     }
 
+    // index 페이지 요청시 글 목록 가져오기
+    @Transactional
+    public List<Board> boardList()
+    {
+        return boardRepository.findAll();
+    }
 }
