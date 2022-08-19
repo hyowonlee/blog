@@ -4,6 +4,8 @@ import com.cro.blog.model.Board;
 import com.cro.blog.model.User;
 import com.cro.blog.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,8 +29,8 @@ public class BoardService {
 
     // index 페이지 요청시 글 목록 가져오기
     @Transactional
-    public List<Board> boardList()
+    public Page<Board> boardList(Pageable pageable) // index 페이지 부르는 컨트롤러에서 매개변수로 페이징하는 Pageable 클래스를 받아오는데 그걸로 findAll에 넘겨주면 페이징 가능
     {
-        return boardRepository.findAll();
+        return boardRepository.findAll(pageable);
     }
 }

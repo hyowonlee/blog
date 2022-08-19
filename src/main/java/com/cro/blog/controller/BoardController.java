@@ -4,6 +4,9 @@ import com.cro.blog.config.auth.PrincipalDetail;
 import com.cro.blog.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,20 +22,28 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping({"", "/"})
-    // 첫 홈페이지 요청 컨트롤러로 본문에 메인페이지 index를 포함한 header 요청
-    public String headerIndex(Model model) {
-        //System.out.println("로그인 사용자 아이디:"+principalDetail);
+//    @GetMapping({"", "/"})
+//    // 첫 홈페이지 요청 컨트롤러로 본문에 메인페이지 index를 포함한 header 요청
+//    public String headerIndex(Model model, @PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC)Pageable pageable) // 페이징 하기위한 매개변수
+//    {
+//        //System.out.println("로그인 사용자 아이디:"+principalDetail);
+//
+//        model.addAttribute("boards", boardService.boardList(pageable)); // index페이지 요청할때 뿌려줄 글 목록 가져와서 Model을 사용해 view로 넘김
+//        return "layout/headerIndex"; // 여기서 viewResolver가 작동하여 리턴되는 이름과 매핑되는 페이지와 model로 넘기는 정보를 들고 이동해줌
+//    }
 
-        model.addAttribute("boards", boardService.boardList()); // index페이지 요청할때 뿌려줄 글 목록 가져와서 Model을 사용해 view로 넘김
+    @GetMapping({"", "/"})
+    // 첫 홈페이지 요청 컨트롤러로 본문에 메인페이지 header 요청 index는 js 에서 요청
+    public String headerIndex() // 페이징 하기위한 매개변수
+    {
         return "layout/headerIndex"; // 여기서 viewResolver가 작동하여 리턴되는 이름과 매핑되는 페이지와 model로 넘기는 정보를 들고 이동해줌
     }
 
     @GetMapping("/index")
-    public String index(Model model)
+    public String index(Model model, @PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC)Pageable pageable) // 페이징 하기위한 매개변수
     { // 홈페이지 이용중 메인페이지로 이동시 ajax로 본문만 갈아끼우기 위한 컨트롤러
 
-        model.addAttribute("boards", boardService.boardList()); // index페이지 요청할때 뿌려줄 글 목록 가져와서 Model을 사용해 view로 넘김
+        model.addAttribute("boards", boardService.boardList(pageable)); // index페이지 요청할때 뿌려줄 글 목록 가져와서 Model을 사용해 view로 넘김
         return "index";
     }
 
