@@ -15,7 +15,9 @@
             <textarea class="form-control summernote" rows="5" id="content"></textarea>
         </div>
     </form>
-    <button id="btn-save" class="btn btn-primary">저장</button>
+    <div class="float-right">
+        <button id="btn-save" class="btn btn-primary">저장</button>
+    </div>
 </div>
 
 <script>

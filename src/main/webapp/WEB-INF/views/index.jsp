@@ -11,7 +11,7 @@
         <div class="card-body">
             <h4 class="card-title">${board.title}</h4> <%--${board.title}은 우리가 클래스에서 만들어준 getTitle() getter가 호출됨 데이터를 모델에서 다 들고오는게 아닌듯--%>
             <%--<p class="card-text">상세보기</p>--%>
-            <a href="#" class="btn btn-primary">상세보기</a>
+            <a id="/auth/board/${board.id}" class="btn btn-primary">상세보기</a>
         </div>
     </div>
     </c:forEach>
