@@ -28,18 +28,24 @@ public class BoardService {
     }
 
     // index 페이지 요청시 글 목록 가져오기
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<Board> boardList(Pageable pageable) // index 페이지 부르는 컨트롤러에서 매개변수로 페이징하는 Pageable 클래스를 받아오는데 그걸로 findAll에 넘겨주면 페이징 가능
     {
         return boardRepository.findAll(pageable);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Board boardDetail(int id)
     {
         return boardRepository.findById(id)
                 .orElseThrow(()->{
                     return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다");
                 });
+    }
+
+    @Transactional
+    public void boardDelete(int id)
+    {
+        boardRepository.deleteById(id);
     }
 }

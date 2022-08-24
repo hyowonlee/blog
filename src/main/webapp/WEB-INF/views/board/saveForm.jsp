@@ -3,7 +3,7 @@
 <%--<%@ include file="layout/headerIndex.jsp" %>--%>
 
 <div class="container">
-    <form> <%--컨트롤러에서 만들지는 않을것 SecurityConfig.java에서 세팅으로 스프링 시큐리티가 가로채게 할것--%>
+    <form>
 
         <div class="form-group">
             <label for="title">Title</label>

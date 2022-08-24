@@ -9,6 +9,10 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
         $("#btn-save").on("click", () => {
             this.save();
         });
+
+        $("#btn-delete").on("click", () => {
+            this.delete();
+        });
     },
 
     // 글 저장
@@ -30,6 +34,25 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
                 location.href = "/";
             } else {
                 alert("글쓰기 실패");
+            }
+        }).fail(function (error) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
+            alert(JSON.stringify(error)); // alert에서 내용 보이려면 string 타입이여야돼서 변환
+        });
+    },
+    // 글 삭제
+    delete: function () {
+        var id = $("#id").text();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/board/delete/'+id,
+            dataType: "json",
+        }).done(function (response) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
+            if (response.data == 1) {
+                alert("글삭제가 완료되었습니다");
+                location.href = "/";
+            } else {
+                alert("글삭제 실패");
             }
         }).fail(function (error) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
             alert(JSON.stringify(error)); // alert에서 내용 보이려면 string 타입이여야돼서 변환

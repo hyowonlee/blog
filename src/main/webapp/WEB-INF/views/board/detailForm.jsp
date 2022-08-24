@@ -3,6 +3,11 @@
 
 <div class="container">
     <br />
+    <div>
+        글 번호 : <span id="id"><i>${board.id}</i></span> <br/>
+        글 작성자 : <span><i>${board.user.username}</i></span>
+    </div>
+    <hr/>
     <div class="form-group">
         <h3>${board.title}</h3>
     </div>

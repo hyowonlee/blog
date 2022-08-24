@@ -9,9 +9,7 @@ import com.cro.blog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,4 +26,11 @@ public class BoardApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // 성공시 1 리턴
     }
 
+    @DeleteMapping("/api/board/delete/{id}")
+    public ResponseDto<Integer> delete(@PathVariable int id)
+    {
+        System.out.println("BoardApiController.delete()");
+        boardService.boardDelete(id);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // 성공시 1 리턴
+    }
 }
