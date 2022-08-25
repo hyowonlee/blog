@@ -28,7 +28,7 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #entity를 만들때 (@ENTITY되어있는걸 테이블로 만들때) 변수명 그대로 DB에 필드를 만들어준다는 의미 (naming.뒤를 바꿔주면 다른 이름만들기 전략도 가능)
       use-new-id-generator-mappings: false  #jpa가 사용하는 기본 넘버링 전략을 사용할건지 묻는것, false로 하면 jpa가 사용하는 기본 넘버링 전략을 따르지 않음 true는 jpa의 기본을 따름
       #이렇게 false 해놓고 model(@Entity)의 PK에서 @GeneratedValue어노테이션 값을 IDENTITIY로 db의 전략을 따라가게 해놓아서 mysql의 기본인 autoincrement를 따라가게 했음
-    show-sql: true #이게 true이면 콘솔창에 sql문이 동작하는게 보임
+    #show-sql: true #이게 true이면 콘솔창에 sql문이 동작하는게 보임
     properties:
       hibernate.format_sql: true # 콘솔창 sql 이쁘게 들여쓰기 해줌
 

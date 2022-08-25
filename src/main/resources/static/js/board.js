@@ -13,6 +13,10 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
         $("#btn-delete").on("click", () => {
             this.delete();
         });
+
+        $("#btn-update").on("click", () => {
+            this.update();
+        })
     },
 
     // 글 저장
@@ -53,6 +57,31 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
                 location.href = "/";
             } else {
                 alert("글삭제 실패");
+            }
+        }).fail(function (error) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
+            alert(JSON.stringify(error)); // alert에서 내용 보이려면 string 타입이여야돼서 변환
+        });
+    },
+    // 글 업데이트
+    update: function () {
+        let id = $("#id").val();
+        let data = {
+            title: $("#title").val(),
+            content: $("#content").val()
+        };
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/board/update/'+id,
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+        }).done(function (response) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
+            if (response.data == 1) {
+                alert("글수정이 완료되었습니다");
+                location.href = "/";
+            } else {
+                alert("글수정 실패");
             }
         }).fail(function (error) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
             alert(JSON.stringify(error)); // alert에서 내용 보이려면 string 타입이여야돼서 변환
