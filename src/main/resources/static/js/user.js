@@ -14,6 +14,10 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
             this.checkUsername();
         });
 
+        $("#btn-update").on("click", () => {
+            this.update();
+        });
+
         // $("#btn-login").on("click", () => {
         //     this.login();
         // });
@@ -39,6 +43,39 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
         }).done(function (response) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
             if (response.data == 1) {
                 alert("회원가입이 완료되었습니다");
+                location.href = "/";
+            } else {
+                alert("회원가입 실패");
+            }
+        }).fail(function (error) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
+            alert(JSON.stringify(error)); // alert에서 내용 보이려면 string 타입이여야돼서 변환
+        });
+    },
+
+    //회원수정
+    update: function () {
+        if($('#password').val()=='' || $('#email').val()=='')
+        {
+            alert("모든 정보를 입력해주시기 바랍니다.");
+            return ;
+        }
+
+        let data = {
+            username: $("#username").val(),
+            password: $("#password").val(),
+            email: $("#email").val()
+        };
+
+        //ajax 호출시 기본이 비동기 호출이라 다른기능들과 동시에 수행 가능
+        $.ajax({
+            type: 'PUT',
+            url: '/api/user/update',
+            data: JSON.stringify(data), // 객체를 전송하려면 객체 자체를 보내면 이해하지 못하니 javascript객체를 json(문자열)로 변환
+            contentType: "application/json; charset=utf-8", // 보낼 데이터의 mime 타입 세팅 (body데이터가 어떤 타입인지 세팅)
+            dataType: "json" // 요청을 서버로해서 응답이 왔을 때 그 문자열이 어떤 타입인지 세팅(이렇게 써주면 json을 javascript 오브젝트로 변경해줌, 안써도 자동으로 json을 javascript객체로 변환되긴함)
+        }).done(function (response) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
+            if (response.data == 1) {
+                alert("회원수정이 완료되었습니다");
                 location.href = "/";
             } else {
                 alert("회원가입 실패");

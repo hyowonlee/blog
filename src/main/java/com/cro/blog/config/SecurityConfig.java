@@ -34,7 +34,7 @@ public class SecurityConfig { //WebSecurityConfigurerAdapter가 deprecated 되�
         http
             .csrf().disable() // 이거 안걸면 post 요청 안됨 (csrf 토큰 비활성화)
             .authorizeRequests() // 요청이 들어오면
-            .antMatchers("/auth/**", "/", "/index", "/css/**", "/img/**", "/js/**", "/dummy/**") // /auth로 들어오는건
+            .antMatchers("/auth/**", "/", "/index", "/css/**", "/img/**", "/js/**", "/dummy/**", "/board/**", "/user/**") // /auth로 들어오는건
             .permitAll() // 모든 사람에게 허용
             .anyRequest() // 이 이외의 요청은
             .authenticated() // 인증이 필요함

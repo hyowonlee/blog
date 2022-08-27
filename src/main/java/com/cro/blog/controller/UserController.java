@@ -1,5 +1,7 @@
 package com.cro.blog.controller;
 
+import com.cro.blog.config.auth.PrincipalDetail;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -23,5 +25,11 @@ public class UserController {
     public String securityLoginForm()
     {
         return "layout/headerIndex";
+    }
+
+    @GetMapping("/user/updateForm")
+    public String updateForm()
+    {
+        return "user/updateForm";
     }
 }

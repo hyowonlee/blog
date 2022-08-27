@@ -1,13 +1,12 @@
 package com.cro.blog.controller.api;
 
 import com.cro.blog.dto.ResponseDto;
+import com.cro.blog.model.Board;
 import com.cro.blog.model.User;
 import com.cro.blog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,6 +39,14 @@ public class UserApiController {
         {
             return new ResponseDto<Integer>(HttpStatus.INTERNAL_SERVER_ERROR.value(), -1);
         }
+    }
+
+    @PutMapping("/api/user/update")
+    public ResponseDto<Integer> update(@RequestBody User user)
+    {
+        System.out.println("UserApiController.update()");
+        userService.userUpdate(user);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
 //    @Autowired

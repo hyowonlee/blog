@@ -41,6 +41,20 @@ public class UserService {
         return userRepository.existsByUsername(username);
     }
 
+    //회원정보 수정
+    @Transactional
+    public void userUpdate(User requestUser)
+    {
+        User user = userRepository.findByUsername(requestUser.getUsername()).
+                orElseThrow(()->{
+                    return new IllegalArgumentException("해당 사용자를 찾을 수 없습니다.:"+requestUser.getUsername());
+                });
+
+        String encPassword = bCryptPasswordEncoder.encode(requestUser.getPassword()); // password 해쉬화 해서 저장
+
+        user.setPassword(encPassword);
+        user.setEmail(requestUser.getEmail());
+    }
 
 //    // 시큐리티를 사용하지 않은 전통적 로그인
 //    @Transactional(readOnly = true) // readOnly옵션을통해 select 할때 트랜잭션 시작, 서비스 종료시에 트랜잭션을 종료해 데이터 정합성을 유지해줌
