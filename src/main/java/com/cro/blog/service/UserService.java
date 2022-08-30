@@ -54,6 +54,7 @@ public class UserService {
 
         user.setPassword(encPassword);
         user.setEmail(requestUser.getEmail());
+        // 따로 userRepository.save(user)안해도 트랜잭션 끝나면 더티체킹되어서 자동으로 업데이트 된 User 객체가 db에 저장될 것
     }
 
 //    // 시큐리티를 사용하지 않은 전통적 로그인

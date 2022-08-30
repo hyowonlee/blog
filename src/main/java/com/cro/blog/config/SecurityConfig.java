@@ -2,6 +2,8 @@ package com.cro.blog.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +15,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity // 해당클래스가 시큐리티 필터에 등록이된다
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 특정 주소로 접근 시 페이지 요청보다 권한 및 인증을 미리 체크하겠다고 true로 설정한것
 public class SecurityConfig { //WebSecurityConfigurerAdapter가 deprecated 되어서 더이상 사용 못하고 SecurityFilterChain 를 빈으로 등록하는 방식을 사용
+
+    // UserApiController.java쪽에 update 함수에서 회원수정시 세션값 수정해주려고 사용
+    // 원래 61강 강의에선 WebSecurityConfigurerAdapter의 authenticationManagerBean()를 오버라이드해서 빈등록해 AuthenticationManager를 di로 가져와서 사용했는데
+    // WebSecurityConfigurerAdapter가 deprecated 되어서 "security config authentication manager"로 스택오버플로 찾아보니 이걸로 적용해서 AuthenticationManager를 가져오라 함
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception
+    {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
     @Bean // 이 함수가 리턴하는 BCryptPasswordEncoder객체를 빈 등록으로 IOC함
     public BCryptPasswordEncoder encodePWD() {
