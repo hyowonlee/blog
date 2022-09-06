@@ -21,13 +21,40 @@
         <div>${board.content}</div>
     </div>
     <hr />
+
     <div class="float-right">
     <%--<button class="btn btn-secondary">돌아가기</button>--%>
         <c:if test="${board.user.id == principal.user.id}">
             <a id="/board/updateForm/${board.id}" class="btn btn-warning">수정</a>
             <button id="btn-delete" class="btn btn-danger">삭제</button>
         </c:if>
+
     </div>
+
+    <div><br /><br /></div>
+
+    <div class="card">
+        <div class="card-body">
+            <textarea class="form-control" row="1"></textarea>
+        </div>
+        <div class="card-footer">
+            <input type="button" value="등록" class="btn btn-primary float-right" />
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-header">댓글 리스트</div>
+        <ul id="comment--box" class="list-group">
+          <li id="comment--1" class="list-group-item d-flex justify-content-between">
+              <div>댓글 내용</div>
+              <div class="d-flex">
+                <div class="font-italic">작성자: 1 &nbsp;</div>
+                <button class="badge">삭제</button>
+              </div>
+          </li>
+        </ul>
+    </div>
+
 </div>
 
 
