@@ -1,7 +1,9 @@
 package com.cro.blog.test.controller;
 
+import com.cro.blog.model.Board;
 import com.cro.blog.model.RoleType;
 import com.cro.blog.model.User;
+import com.cro.blog.repository.BoardRepository;
 import com.cro.blog.repository.UserRepository;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -26,12 +28,22 @@ import java.util.function.Supplier;
 @Controller
 public class DummyControllerTest {
 
+    @Autowired
+    BoardRepository boardRepository;
+
     //생성자 주입
     @Autowired
     public DummyControllerTest(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
     private UserRepository userRepository;
+
+    @GetMapping("/dummy/board/{id}")
+    @ResponseBody
+    public Board getBoard(@PathVariable int id)
+    {
+        return boardRepository.findById(id).get();
+    }
 
     @GetMapping("/dummy/join")
     public String testView()
