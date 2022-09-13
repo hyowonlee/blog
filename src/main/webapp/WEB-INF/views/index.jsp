@@ -39,6 +39,7 @@
 </div>
 
 <%--headerIndex.js의 a 클릭 ajax 페이지 로딩이 a태그에 바인딩 되어야 되는데 헤더 페이지 로딩되고 a태그에 바인딩 되고 이 페이지가 불러와져서 여긴 a태그에 바인딩이 안됨 그래서 js파일 따로 만들어서 따로 import해줌--%>
+<%--headerIndex.js를 여기에 써서 또 import 해도 되지만 쓸모없는 코드가 있어서 내 생각으로 따로 index.js 만든거--%>
 <script src="/js/index.js"></script>
 
 

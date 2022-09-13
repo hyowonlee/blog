@@ -3,6 +3,7 @@ package com.cro.blog.controller.api;
 import com.cro.blog.config.auth.PrincipalDetail;
 import com.cro.blog.dto.ResponseDto;
 import com.cro.blog.model.Board;
+import com.cro.blog.model.Reply;
 import com.cro.blog.model.User;
 import com.cro.blog.service.BoardService;
 import com.cro.blog.service.UserService;
@@ -40,5 +41,14 @@ public class BoardApiController {
         System.out.println("BoardApiController.update()");
         boardService.boardUpdate(id, board);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
+    // 댓글 저장
+    @PostMapping("/api/board/{boardId}/reply")
+    public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principalDetail) //스프링 시큐리티에서 세션 가져오려면 @AuthenticationPrincipal PrincipalDetail principalDetail이 매개변수로 세션 받아주면 됨 아니면 아래 주석처럼 di 해도 접근가능
+    {
+        System.out.println("BoardApiController.replySave()");
+        boardService.replySave(reply, principalDetail.getUser(), boardId); // 게시물에 user 정보가 필요하니 세션에서 가져온 user객체 사용
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // 성공시 1 리턴
     }
 }

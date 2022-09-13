@@ -1,8 +1,10 @@
 package com.cro.blog.service;
 
 import com.cro.blog.model.Board;
+import com.cro.blog.model.Reply;
 import com.cro.blog.model.User;
 import com.cro.blog.repository.BoardRepository;
+import com.cro.blog.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,7 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository; // lombok의 @RequiredArgsConstructor를 이용한 생성자 주입
+    private final ReplyRepository replyRepository;
 
     // 글 저장
     // exception시 GlobalExceptionHandler.java에서 에러 잡아서 리턴될것
@@ -61,5 +64,20 @@ public class BoardService {
         board.setTitle(requestBoard.getTitle());
         board.setContent(requestBoard.getContent());
         // 이 함수 종료시 트랜잭션이 종료되고 더티체킹 되어서 수정사항이 자동 업데이트 될것
+    }
+
+    // 댓글 저장
+    @Transactional // 이 로직을 트랜잭션으로 등록, 성공시 db commit 실패시 rollback될것
+    public void replySave(Reply requestReply, User user, int boardId)
+    {
+        Board board = boardRepository.findById(boardId) // 댓글에 들어갈 board 객체 찾기
+                .orElseThrow(()->{
+                    return new IllegalArgumentException("댓글 쓰기 실패 : 게시글 아이디를 찾을 수 없습니다.");
+                });
+
+        requestReply.setBoard(board);
+        requestReply.setUser(user);
+
+        replyRepository.save(requestReply); // db에 insert
     }
 }

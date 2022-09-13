@@ -35,14 +35,22 @@
 
     <div class="card">
         <div class="card-body">
-            <textarea class="form-control" row="1"></textarea>
+            <textarea id="reply-content" class="form-control" row="1"></textarea>
         </div>
         <div class="card-footer">
-            <input type="button" value="등록" class="btn btn-primary float-right" />
+            <c:choose>
+                <c:when test="${empty principal}"> <%--로그인했을때만 댓글 등록 가능하게 버튼 비활성--%>
+                    <input id="btn-reply-save" type="button" value="등록" class="btn btn-primary float-right" disabled/>
+                </c:when>
+                <c:otherwise>
+                    <input id="btn-reply-save" type="button" value="등록" class="btn btn-primary float-right"/>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
     <br />
     <div class="card">
+        <input type="hidden" id="board-id" value="${board.id}">
         <div class="card-header">댓글 리스트</div>
         <ul id="reply--box" class="list-group">
             <c:forEach var="reply" items="${board.replys}">
@@ -64,4 +72,5 @@
 
 <script src="/js/board.js"></script>
 <%--headerIndex.js의 a 클릭 ajax 페이지 로딩이 a태그에 바인딩 되어야 되는데 헤더 페이지 로딩되고 a태그에 바인딩 되고 이 페이지가 불러와져서 여긴 a태그에 바인딩이 안됨 그래서 js파일 따로 만들어서 따로 import해줌--%>
+<%--headerIndex.js를 여기에 써서 또 import 해도 되지만 쓸모없는 코드가 있어서 내 생각으로 따로 index.js 만든거--%>
 <script src="/js/index.js"></script>
