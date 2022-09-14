@@ -1,6 +1,7 @@
 package com.cro.blog.controller.api;
 
 import com.cro.blog.config.auth.PrincipalDetail;
+import com.cro.blog.dto.ReplySaveRequestDto;
 import com.cro.blog.dto.ResponseDto;
 import com.cro.blog.model.Board;
 import com.cro.blog.model.Reply;
@@ -43,12 +44,21 @@ public class BoardApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
-    // 댓글 저장
+    // 댓글 저장 (dto를 통해 저장, 유저값도 dto 안에 넣을 수는 있는데 그럼 jsp안에 또 hidden 태그로 user id를 넣어줘야되서 그건 싫어서 걍 자바에서 세션 가져옴)
     @PostMapping("/api/board/{boardId}/reply")
-    public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principalDetail) //스프링 시큐리티에서 세션 가져오려면 @AuthenticationPrincipal PrincipalDetail principalDetail이 매개변수로 세션 받아주면 됨 아니면 아래 주석처럼 di 해도 접근가능
+    public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replySaveRequestDto, @AuthenticationPrincipal PrincipalDetail principalDetail) //스프링 시큐리티에서 세션 가져오려면 @AuthenticationPrincipal PrincipalDetail principalDetail이 매개변수로 세션 받아주면 됨 아니면 아래 주석처럼 di 해도 접근가능
     {
         System.out.println("BoardApiController.replySave()");
-        boardService.replySave(reply, principalDetail.getUser(), boardId); // 게시물에 user 정보가 필요하니 세션에서 가져온 user객체 사용
+        boardService.replySave(replySaveRequestDto, principalDetail.getUser()); // 게시물에 user 정보가 필요하니 세션에서 가져온 user객체 사용
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // 성공시 1 리턴
     }
+
+//    // 댓글 저장
+//    @PostMapping("/api/board/{boardId}/reply")
+//    public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principalDetail) //스프링 시큐리티에서 세션 가져오려면 @AuthenticationPrincipal PrincipalDetail principalDetail이 매개변수로 세션 받아주면 됨 아니면 아래 주석처럼 di 해도 접근가능
+//    {
+//        System.out.println("BoardApiController.replySave()");
+//        boardService.replySave(reply, principalDetail.getUser(), boardId); // 게시물에 user 정보가 필요하니 세션에서 가져온 user객체 사용
+//        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // 성공시 1 리턴
+//    }
 }

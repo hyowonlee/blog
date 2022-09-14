@@ -94,12 +94,13 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
     // 댓글 작성
     replySave: function () {
         let data = {
+            boardId: $("#board-id").val(),
             content: $("#reply-content").val()
         };
-        let boardId = $("#board-id").val();
+
         $.ajax({
             type: 'POST',
-            url: `/api/board/${boardId}/reply`,
+            url: `/api/board/${data.boardId}/reply`,
             data: JSON.stringify(data), // 객체를 전송하려면 객체 자체를 보내면 이해하지 못하니 javascript객체를 json(문자열)로 변환
             contentType: "application/json; charset=utf-8", // 보낼 데이터의 mime 타입 세팅 (body데이터가 어떤 타입인지 세팅)
             dataType: "json" // 요청을 서버로해서 응답이 왔을 때 그 문자열이 어떤 타입인지 세팅(이렇게 써주면 json을 javascript 오브젝트로 변경해줌, 안써도 자동으로 json을 javascript객체로 변환되긴함)
@@ -110,7 +111,7 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
             // 댓글 작성 완료 후 ajax로 페이지 갈려고 여기서 다시 ajax 요청해서 페이지 가져와서 장갈이 함
             $.ajax({
                 method: 'GET',
-                url: `/auth/board/${boardId}`,
+                url: `/auth/board/${data.boardId}`,
                 dataType: 'html',
             })
                 .done(function (response) {

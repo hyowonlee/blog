@@ -1,5 +1,6 @@
 package com.cro.blog.service;
 
+import com.cro.blog.dto.ReplySaveRequestDto;
 import com.cro.blog.model.Board;
 import com.cro.blog.model.Reply;
 import com.cro.blog.model.User;
@@ -68,16 +69,19 @@ public class BoardService {
 
     // 댓글 저장
     @Transactional // 이 로직을 트랜잭션으로 등록, 성공시 db commit 실패시 rollback될것
-    public void replySave(Reply requestReply, User user, int boardId)
+    public void replySave(ReplySaveRequestDto replySaveRequestDto, User user)
     {
-        Board board = boardRepository.findById(boardId) // 댓글에 들어갈 board 객체 찾기
+        Board board = boardRepository.findById(replySaveRequestDto.getBoardId()) // 댓글에 들어갈 board 객체 찾기
                 .orElseThrow(()->{
                     return new IllegalArgumentException("댓글 쓰기 실패 : 게시글 아이디를 찾을 수 없습니다.");
                 });
 
-        requestReply.setBoard(board);
-        requestReply.setUser(user);
+        Reply reply = Reply.builder()
+                .user(user)
+                .board(board)
+                .content(replySaveRequestDto.getContent())
+                .build();
 
-        replyRepository.save(requestReply); // db에 insert
+        replyRepository.save(reply); // db에 insert
     }
 }
