@@ -53,6 +53,14 @@ public class BoardApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // 성공시 1 리턴
     }
 
+    @DeleteMapping("/api/board/{boardId}/reply/delete/{replyId}")
+    public ResponseDto<Integer> replyDelete(@PathVariable int replyId)
+    {
+        System.out.println("BoardApiController.replyDelete()");
+        boardService.replyDelete(replyId);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
 //    // 댓글 저장
 //    @PostMapping("/api/board/{boardId}/reply")
 //    public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principalDetail) //스프링 시큐리티에서 세션 가져오려면 @AuthenticationPrincipal PrincipalDetail principalDetail이 매개변수로 세션 받아주면 됨 아니면 아래 주석처럼 di 해도 접근가능

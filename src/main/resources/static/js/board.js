@@ -21,6 +21,8 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
         $("#btn-reply-save").on("click", () => {
             this.replySave();
         });
+
+        //#btn-reply-delete는 id를 js에서 가져오기 힘들어서 리스너로 처리를 못함 그래서 jsp에서 onclick으로 직접 함수등록함
     },
 
     // 글 저장
@@ -126,6 +128,35 @@ var index = { // javascript 객체 ajax때문에 페이지마다 여러번 선�
 
             } else {
                 alert("댓글쓰기 실패");
+            }
+        }).fail(function (error) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
+            alert(JSON.stringify(error)); // alert에서 내용 보이려면 string 타입이여야돼서 변환
+        });
+    },
+
+    replyDelete: function (boardId, replyId) {
+
+        $.ajax({
+            type: 'DELETE',
+            url: `/api/board/${boardId}/reply/delete/${replyId}`,
+            dataType: "json",
+        }).done(function (response) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
+            if (response.data == 1) {
+                alert("댓글삭제가 완료되었습니다");
+
+                $.ajax({
+                    method: "GET",
+                    url: `/auth/board/${boardId}`,
+                    dataType: 'html',
+                })
+                    .done(function (response) {
+                        $('#bodyContents').children().remove(); // ajax로 본문만 갈아낄거니 현재 header.jsp의 bodyContents에 있는 요소 제거
+                        $("#bodyContents").html(response); // ajax로 받아온 본문 내용을 header.jsp의 bodyContents에 html로 추가
+
+                        $(".navbar-nav").find(".active").removeClass("active"); // navbar에서 이전 페이지항목 active 상태 제거
+                    })
+            } else {
+                alert("댓글삭제 실패");
             }
         }).fail(function (error) { // ajax요청해서 받은 응답이 여기 매개변수로 들어옴
             alert(JSON.stringify(error)); // alert에서 내용 보이려면 string 타입이여야돼서 변환

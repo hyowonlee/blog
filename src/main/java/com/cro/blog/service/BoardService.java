@@ -85,6 +85,12 @@ public class BoardService {
         replyRepository.save(reply); // db에 insert
     }
 
+    @Transactional
+    public void replyDelete(int id)
+    {
+        replyRepository.deleteById(id);
+    }
+
 //    // native query 댓글 저장
 //    @Transactional // 이 로직을 트랜잭션으로 등록, 성공시 db commit 실패시 rollback될것
 //    public void replySave(ReplySaveRequestDto replySaveRequestDto, User user)
