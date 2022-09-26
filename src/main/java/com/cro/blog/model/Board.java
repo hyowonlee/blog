@@ -36,7 +36,7 @@ public class Board {
     @JoinColumn(name = "userId") // DB에는 userId라는 컬럼명으로 들어가게 될것 (여기선 객체지만 db에 만들어질땐 user의 int id값인 FK로 데이터가 들어갈것)
     private User user; // 작성자 정보 (JPA 사용시 오브젝트를 DB에 저장할 수 있게됨, ORM에서는 ID를 통한 외래키로 조인하지 않고 그냥 엔티티 객체 자체를 멤버변수로 넣어줌)
 
-    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // 이놈은 mappedBy 되어있어서 테이블에 들어가는 놈이 아님 나중에 select 하기위해서 연관관계 세팅해준것
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // 이놈은 mappedBy 되어있어서 테이블에 들어가는 놈이 아님 나중에 select 하기위해서 연관관계 세팅해준것 (cascade 옵션으로 board 삭제시 댓글도 같이 ㅅ삭제)
    //mappedBy를 세팅하면 이 클래스가 FK를 가진 연관관계의 주인이 아님 즉 board와 reply의 FK컬럼은 reply테이블에 만들것
     //그렇다면 이 onetomany는 board를 select시 join을 통해 값을 얻어오기 위해 필요한 것, mappedBy = "board"는 Reply 클래스에 있는 board 필드를 의미하는 것 (mappedBy를 쓰면 이 멤버는 연관관계의 주인이 아니라는거 이건 Reply.java에서 설명)
     //reply는 one to many라 여러건이 있을수도 있음 그래서 필요할때만 들고오게 lazy 전략이 기본임(onetomany의 기본전략은 lazy fetch 안써주면 lazy)
