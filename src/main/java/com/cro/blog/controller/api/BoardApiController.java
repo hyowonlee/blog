@@ -53,11 +53,21 @@ public class BoardApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // 성공시 1 리턴
     }
 
+    // 댓글 삭제
     @DeleteMapping("/api/board/{boardId}/reply/delete/{replyId}")
     public ResponseDto<Integer> replyDelete(@PathVariable int replyId)
     {
         System.out.println("BoardApiController.replyDelete()");
         boardService.replyDelete(replyId);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
+    // 댓글 수정
+    @PutMapping("/api/board/{boardId}/reply/update/{replyId}")
+    public ResponseDto<Integer> replyUpdate(@PathVariable int replyId, @RequestBody Reply reply)
+    {
+        System.out.println("BoardApiController.replyUpdate()");
+        boardService.replyUpdate(reply);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

@@ -91,6 +91,19 @@ public class BoardService {
         replyRepository.deleteById(id);
     }
 
+    @Transactional
+    public void replyUpdate(Reply requestReply)
+    {
+        Reply reply = replyRepository.findById(requestReply.getId()) // 글 수정하기위해 일단 db에서 select해서 가져와서 영속화 시킴
+                .orElseThrow(()->{
+                    return new IllegalArgumentException("댓글 찾기 실패 : 아이디를 찾을 수 없습니다.");
+                    });
+
+        // 가져온 board 객체에서 수정해야 영속화된 객체를 수정하는거니 꼭 select해온 객체를 수정해야됨
+        reply.setContent(requestReply.getContent());
+        // 이 함수 종료시 트랜잭션이 종료되고 더티체킹 되어서 수정사항이 자동 업데이트 될것
+    }
+
 //    // native query 댓글 저장
 //    @Transactional // 이 로직을 트랜잭션으로 등록, 성공시 db commit 실패시 rollback될것
 //    public void replySave(ReplySaveRequestDto replySaveRequestDto, User user)
