@@ -1,6 +1,6 @@
 $((function () { // header.jsp의 위쪽 head에 script가 있어서 html body태그를 먼저 읽어야 해당 태그에 클래스를 추가 할 수 있어서 전부 로드 실행되는 ready() 사용이지만 대신 같은역할의 권장하는 $()사용
 
-        $("a").on("click", function () {
+        $("a").off().on("click", function () { // .off()를 통해서 같은 엘리먼트에 이벤트가 중복으로 등록되지 않게 세팅
             link = $(this).attr("id"); //여기선 this로 html문서에 있는 클릭한 a태그를 찾는거니 화살표함수가 아닌 function으로 사용 (user.js에 this 바인딩 설명 써놓음)
             if(link == undefined)
             {

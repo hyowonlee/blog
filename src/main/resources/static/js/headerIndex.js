@@ -47,7 +47,7 @@ $((function () { // header.jsp의 위쪽 head에 script가 있어서 html body�
                 });
         }
 
-        $("a").on("click", function () {
+        $("a").off().on("click", function () { // .off()를 통해서 같은 엘리먼트에 이벤트가 중복으로 등록되지 않게 세팅
             link = $(this).attr("id"); //여기선 this로 html문서에 있는 클릭한 a태그를 찾는거니 화살표함수가 아닌 function으로 사용 (user.js에 this 바인딩 설명 써놓음)
             if(link == undefined)
             {
